@@ -134,6 +134,7 @@ INCLUDEPATH +=                                                                  
     Controllers/WootingKeyboardController/                                                      \
     Controllers/YeelightController/                                                             \
     Controllers/ZalmanZSyncController/                                                          \
+    FanController/                                                                              \
     RGBController/                                                                              \
     qt/
 
@@ -165,6 +166,7 @@ HEADERS +=                                                                      
     pci_ids/pci_ids.h                                                                           \
     qt/DeviceView.h                                                                             \
     qt/OpenRGBDialog2.h                                                                         \
+    qt/OpenRGBFanPage.h                                                                         \
     qt/OpenRGBPluginContainer.h                                                                 \
     qt/OpenRGBPluginsPage/OpenRGBPluginsEntry.h \
     qt/OpenRGBPluginsPage/OpenRGBPluginsPage.h                                                  \
@@ -418,6 +420,7 @@ HEADERS +=                                                                      
     Controllers/ThermaltakePoseidonZRGBController/RGBController_ThermaltakePoseidonZRGB.h       \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingController.h                         \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingQuadController.h                     \
+    Controllers/ThermaltakeRiingController/FanController_ThermaltakeRiing.h                     \
     Controllers/ThermaltakeRiingController/RGBController_ThermaltakeRiing.h                     \
     Controllers/WootingKeyboardController/WootingKeyboardController.h                           \
     Controllers/WootingKeyboardController/WootingOneKeyboardController.h                        \
@@ -428,6 +431,7 @@ HEADERS +=                                                                      
     Controllers/YeelightController/RGBController_Yeelight.h                                     \
     Controllers/ZalmanZSyncController/ZalmanZSyncController.h                                   \
     Controllers/ZalmanZSyncController/RGBController_ZalmanZSync.h                               \
+    FanController/FanController.h                                                               \
     RGBController/RGBController.h                                                               \
     RGBController/RGBController_Dummy.h                                                         \
     RGBController/RGBController_Network.h                                                       \
@@ -486,6 +490,7 @@ SOURCES +=                                                                      
     net_port/net_port.cpp                                                                       \
     qt/DeviceView.cpp                                                                           \
     qt/OpenRGBDialog2.cpp                                                                       \
+    qt/OpenRGBFanPage.cpp                                                                       \
     qt/OpenRGBPluginContainer.cpp                                                               \
     qt/OpenRGBPluginsPage/OpenRGBPluginsEntry.cpp \
     qt/OpenRGBPluginsPage/OpenRGBPluginsPage.cpp                                                \
@@ -803,6 +808,7 @@ SOURCES +=                                                                      
     Controllers/ThermaltakeRiingController/ThermaltakeRiingController.cpp                       \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingQuadController.cpp                   \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingControllerDetect.cpp                 \
+    Controllers/ThermaltakeRiingController/FanController_ThermaltakeRiing.cpp                   \
     Controllers/ThermaltakeRiingController/RGBController_ThermaltakeRiing.cpp                   \
     Controllers/WootingKeyboardController/WootingKeyboardController.cpp                         \
     Controllers/WootingKeyboardController/WootingKeyboardControllerDetect.cpp                   \
@@ -829,6 +835,7 @@ FORMS +=                                                                        
     qt/OpenRGBDevicePage.ui                                                                     \
     qt/OpenRGBDialog.ui                                                                         \
     qt/OpenRGBDialog2.ui                                                                        \
+    qt/OpenRGBFanPage.ui                                                                        \
     qt/OpenRGBPluginContainer.ui                                                                \
     qt/OpenRGBPluginsPage/OpenRGBPluginsEntry.ui \
     qt/OpenRGBPluginsPage/OpenRGBPluginsPage.ui                                                 \
