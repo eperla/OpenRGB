@@ -165,6 +165,7 @@ HEADERS +=                                                                      
     filesystem.h                                                                                \
     qt/DetectorTableModel.h                                                                     \
     qt/OpenRGBClientInfoPage.h                                                                  \
+    qt/OpenRGBConsolePage.h                                                                     \
     qt/OpenRGBDeviceInfoPage.h                                                                  \
     qt/OpenRGBDevicePage.h                                                                      \
     qt/OpenRGBDialog.h                                                                          \
@@ -319,14 +320,16 @@ HEADERS +=                                                                      
     Controllers/HPOmen30LController/RGBController_HPOmen30L.h                                   \
     Controllers/HyperXDRAMController/HyperXDRAMController.h                                     \
     Controllers/HyperXDRAMController/RGBController_HyperXDRAM.h                                 \
+    Controllers/HyperXKeyboardController/HyperXAlloyEliteController.h                           \
     Controllers/HyperXKeyboardController/HyperXAlloyElite2Controller.h                          \
+    Controllers/HyperXKeyboardController/HyperXAlloyFPSController.h                             \
     Controllers/HyperXKeyboardController/HyperXAlloyOriginsController.h                         \
     Controllers/HyperXKeyboardController/HyperXAlloyOriginsCoreController.h                     \
-    Controllers/HyperXKeyboardController/HyperXKeyboardController.h                             \
+    Controllers/HyperXKeyboardController/RGBController_HyperXAlloyElite.h                       \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyElite2.h                      \
+    Controllers/HyperXKeyboardController/RGBController_HyperXAlloyFPS.h                         \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyOrigins.h                     \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyOriginsCore.h                 \
-    Controllers/HyperXKeyboardController/RGBController_HyperXKeyboard.h                         \
     Controllers/HyperXMouseController/HyperXPulsefireFPSProController.h                         \
     Controllers/HyperXMouseController/HyperXPulsefireHasteController.h                          \
     Controllers/HyperXMouseController/HyperXPulsefireSurgeController.h                          \
@@ -442,6 +445,8 @@ HEADERS +=                                                                      
     Controllers/ThermaltakeRiingController/ThermaltakeRiingController.h                         \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingQuadController.h                     \
     Controllers/ThermaltakeRiingController/RGBController_ThermaltakeRiing.h                     \
+    Controllers/ThingMController/BlinkController.h                                              \
+    Controllers/ThingMController/RGBController_BlinkController.h                                \
     Controllers/WootingKeyboardController/WootingKeyboardController.h                           \
     Controllers/WootingKeyboardController/WootingOneKeyboardController.h                        \
     Controllers/WootingKeyboardController/WootingTwoKeyboardController.h                        \
@@ -501,6 +506,7 @@ SOURCES +=                                                                      
     SettingsManager.cpp                                                                         \
     qt/DetectorTableModel.cpp                                                                   \
     qt/OpenRGBClientInfoPage.cpp                                                                \
+    qt/OpenRGBConsolePage.cpp                                                                   \
     qt/OpenRGBDeviceInfoPage.cpp                                                                \
     qt/OpenRGBDevicePage.cpp                                                                    \
     qt/OpenRGBDialog.cpp                                                                        \
@@ -696,15 +702,17 @@ SOURCES +=                                                                      
     Controllers/HyperXDRAMController/HyperXDRAMController.cpp                                   \
     Controllers/HyperXDRAMController/HyperXDRAMControllerDetect.cpp                             \
     Controllers/HyperXDRAMController/RGBController_HyperXDRAM.cpp                               \
+    Controllers/HyperXKeyboardController/HyperXAlloyEliteController.cpp                         \
     Controllers/HyperXKeyboardController/HyperXAlloyElite2Controller.cpp                        \
+    Controllers/HyperXKeyboardController/HyperXAlloyFPSController.cpp                           \
     Controllers/HyperXKeyboardController/HyperXAlloyOriginsController.cpp                       \
     Controllers/HyperXKeyboardController/HyperXAlloyOriginsCoreController.cpp                   \
-    Controllers/HyperXKeyboardController/HyperXKeyboardController.cpp                           \
     Controllers/HyperXKeyboardController/HyperXKeyboardControllerDetect.cpp                     \
+    Controllers/HyperXKeyboardController/RGBController_HyperXAlloyElite.cpp                     \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyElite2.cpp                    \
+    Controllers/HyperXKeyboardController/RGBController_HyperXAlloyFPS.cpp                       \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyOrigins.cpp                   \
     Controllers/HyperXKeyboardController/RGBController_HyperXAlloyOriginsCore.cpp               \
-    Controllers/HyperXKeyboardController/RGBController_HyperXKeyboard.cpp                       \
     Controllers/HyperXMouseController/HyperXMouseControllerDetect.cpp                           \
     Controllers/HyperXMouseController/HyperXPulsefireFPSProController.cpp                       \
     Controllers/HyperXMouseController/HyperXPulsefireHasteController.cpp                        \
@@ -841,6 +849,9 @@ SOURCES +=                                                                      
     Controllers/ThermaltakeRiingController/ThermaltakeRiingQuadController.cpp                   \
     Controllers/ThermaltakeRiingController/ThermaltakeRiingControllerDetect.cpp                 \
     Controllers/ThermaltakeRiingController/RGBController_ThermaltakeRiing.cpp                   \
+    Controllers/ThingMController/ThingMControllerDetect.cpp                                     \
+    Controllers/ThingMController/BlinkController.cpp                                            \
+    Controllers/ThingMController/RGBController_BlinkController.cpp                              \
     Controllers/WootingKeyboardController/WootingKeyboardController.cpp                         \
     Controllers/WootingKeyboardController/WootingKeyboardControllerDetect.cpp                   \
     Controllers/WootingKeyboardController/WootingOneKeyboardController.cpp                      \
@@ -862,6 +873,7 @@ RESOURCES +=                                                                    
 
 FORMS +=                                                                                        \
     qt/OpenRGBClientInfoPage.ui                                                                 \
+    qt/OpenRGBConsolePage.ui                                                                    \
     qt/OpenRGBDeviceInfoPage.ui                                                                 \
     qt/OpenRGBDevicePage.ui                                                                     \
     qt/OpenRGBDialog.ui                                                                         \
@@ -1207,12 +1219,19 @@ macx {
     serial_port/find_usb_serial_port_linux.cpp                                                  \
     AutoStart/AutoStart-MacOS.cpp                                                               \
 
+    # Use mbedtls v2 instead of latest
+    MBEDTLS_PREFIX = $$system(brew --prefix mbedtls@2)
+
+    INCLUDEPATH +=                                                                              \
+    $$MBEDTLS_PREFIX/include                                                                    \
+
     LIBS +=                                                                                     \
     -lusb-1.0                                                                                   \
     -lhidapi                                                                                    \
     -lmbedx509                                                                                  \
     -lmbedcrypto                                                                                \
     -lmbedtls                                                                                   \
+    -L$$MBEDTLS_PREFIX/lib                                                                      \
 }
 
 #-------------------------------------------------------------------------------------------#

@@ -96,7 +96,8 @@ private:
     void AddQMKORGBSettingsPage();
     void AddSerialSettingsPage();
     void AddYeelightSettingsPage();
-    void AddPluginsPage(PluginManager* plugin_manager);
+    void AddPluginsPage();
+    void AddConsolePage();
 
     void ClearDevicesList();
     void UpdateDevicesList();

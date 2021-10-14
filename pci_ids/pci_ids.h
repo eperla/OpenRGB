@@ -25,6 +25,7 @@
 #define AMD_NAVI14_DEV                                  0x7340
 #define AMD_NAVI21_DEV                                  0x73BF
 #define AMD_NAVI22_DEV                                  0x73DF
+#define AMD_NAVI23_DEV                                  0x73FF
 
 /*-----------------------------------------------------*\
 | Intel Device IDs                                      |
@@ -67,8 +68,10 @@
 #define NVIDIA_RTX3060TI_DEV                            0x2486
 #define NVIDIA_RTX3060TI_LHR_DEV                        0x2489
 #define NVIDIA_RTX3070_DEV                              0x2484
+#define NVIDIA_RTX3070_V2_DEV                           0x2488
 #define NVIDIA_RTX3070TI_DEV                            0x2482
 #define NVIDIA_RTX3080_DEV                              0x2206
+#define NVIDIA_RTX3080_LHR_DEV                          0x2216
 #define NVIDIA_RTX3080TI_DEV                            0x2208
 #define NVIDIA_RTX3090_DEV                              0x2204
 
@@ -120,6 +123,7 @@
 #define ASUS_RX480_STRIX_GAMING_OC                      0x04FB
 #define ASUS_RX570_STRIX_O4G_GAMING_OC                  0x04C2
 #define ASUS_RX580_STRIX_GAMING_OC                      0x0517
+#define ASUS_RX580_STRIX_GAMING_TOP                     0x0519
 
 /*-----------------------------------------------------*\
 | EVGA Sub-Device IDs                                   |
@@ -132,6 +136,7 @@
 #define EVGA_RTX2070S_BLACK_SUB_DEV                     0x3071
 #define EVGA_RTX2070S_XC_ULTRA_SUB_DEV                  0x3173
 #define EVGA_RTX2070S_XC_ULTRA_PLUS_SUB_DEV             0x3175
+#define EVGA_RTX2080_BLACK_SUB_DEV                      0x2081
 #define EVGA_RTX2080_XC_BLACK_SUB_DEV                   0x2082
 #define EVGA_RTX2080_XC_GAMING_SUB_DEV                  0x2182
 #define EVGA_RTX2080_XC_ULTRA_GAMING_SUB_DEV            0x2183
@@ -218,7 +223,9 @@
 #define MSI_RTX2080S_GAMING_X_TRIO_SUB_DEV              0xC724
 #define MSI_RTX2080TI_GAMING_X_TRIO_SUB_DEV             0x3715
 #define MSI_RTX2080TI_SEA_HAWK_EK_X_SUB_DEV             0x3717
+#define MSI_RTX3070_GAMING_TRIO_SUB_DEV                 0x3904
 #define MSI_RTX3070_GAMING_X_TRIO_SUB_DEV               0x3903
+#define MSI_RTX3080_GAMING_Z_TRIO_SUB_DEV               0x389B
 #define MSI_RTX3080_GAMING_X_TRIO_SUB_DEV               0x3892
 #define MSI_RTX3080_SUPRIM_X_SUB_DEV                    0x3897
 #define MSI_RTX3080TI_GAMING_X_TRIO_SUB_DEV             0x389B
@@ -240,6 +247,7 @@
 #define SAPPHIRE_NAVI21_NITRO_PLUS_SUB_DEV2             0xE438
 #define SAPPHIRE_NAVI21_NITRO_PLUS_SUB_DEV3             0xE439
 #define SAPPHIRE_NAVI22_NITRO_PLUS_SUB_DEV              0xE445
+#define SAPPHIRE_NAVI23_NITRO_PLUS_SUB_DEV              0xE448
 
 /*---------------------------------------------------------*\
 | PCI ID Macros                                             |

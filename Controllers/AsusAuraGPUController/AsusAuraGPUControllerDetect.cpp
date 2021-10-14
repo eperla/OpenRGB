@@ -8,6 +8,7 @@
 
 #include "Detector.h"
 #include "AsusAuraGPUController.h"
+#include "LogManager.h"
 #include "RGBController.h"
 #include "RGBController_AsusAuraGPU.h"
 #include "i2c_smbus.h"
@@ -28,6 +29,7 @@ typedef struct
     const char *    name;
 } gpu_pci_device;
 
+#define ASUSGPU_CONTROLLER_NAME "ASUS Aura GPU"
 #define GPU_NUM_DEVICES (sizeof(device_list) / sizeof(device_list[ 0 ]))
 
 static const gpu_pci_device device_list[] =
@@ -60,7 +62,8 @@ static const gpu_pci_device device_list[] =
     { AMD_GPU_VEN,      AMD_NAVI10_DEV,             ASUS_SUB_VEN,       ASUS_RX5700XT_STRIX_GAMING_OC,          0x2A,   "ASUS RX 5700XT Strix Gaming OC"            },
     { AMD_GPU_VEN,      AMD_POLARIS_DEV,            ASUS_SUB_VEN,       ASUS_RX480_STRIX_GAMING_OC,             0x29,   "ASUS ROG STRIX RX480 Gaming OC"            },
     { AMD_GPU_VEN,      AMD_POLARIS_DEV,            ASUS_SUB_VEN,       ASUS_RX570_STRIX_O4G_GAMING_OC,         0x29,   "ASUS RX 570 Strix O4G Gaming OC"           },
-    { AMD_GPU_VEN,      AMD_POLARIS_DEV,            ASUS_SUB_VEN,       ASUS_RX580_STRIX_GAMING_OC,             0x29,   "ASUS RX 580 Strix Gaming OC"               }
+    { AMD_GPU_VEN,      AMD_POLARIS_DEV,            ASUS_SUB_VEN,       ASUS_RX580_STRIX_GAMING_OC,             0x29,   "ASUS RX 580 Strix Gaming OC"               },
+    { AMD_GPU_VEN,      AMD_POLARIS_DEV,            ASUS_SUB_VEN,       ASUS_RX580_STRIX_GAMING_TOP,            0x29,   "ASUS RX 580 Strix Gaming TOP"              },
 };  
 
 /******************************************************************************************\
@@ -78,7 +81,13 @@ bool TestForAsusAuraGPUController(i2c_smbus_interface* bus, unsigned char addres
     unsigned char aura_gpu_magic_high = bus->i2c_smbus_read_byte_data(address, 0x20);                        // High Byte of magic (0x15)                        
     unsigned char aura_gpu_magic_low = bus->i2c_smbus_read_byte_data(address, 0x21);                         // Low Byte of magic (0x89)
 
+    LOG_DEBUG("[%s] Test GPU expect: 0x1589 received: 0x%02X%02X", ASUSGPU_CONTROLLER_NAME, aura_gpu_magic_high, aura_gpu_magic_low);
+
     if((aura_gpu_magic_high << 8) + aura_gpu_magic_low == AURA_GPU_MAGIC_VAL)
+    {
+        pass = true;
+    }
+    if(((aura_gpu_magic_high << 8) + aura_gpu_magic_low == 0) && bus->pci_subsystem_device == ASUS_ROG_STRIX_GTX1070TI_A8G_GAMING)
     {
         pass = true;
     }
@@ -121,4 +130,4 @@ void DetectAsusAuraGPUControllers(std::vector<i2c_smbus_interface*> &busses)
     }
 } /* DetectAsusAuraGPUControllers() */
 
-REGISTER_I2C_DETECTOR("ASUS Aura GPU", DetectAsusAuraGPUControllers);
+REGISTER_I2C_DETECTOR(ASUSGPU_CONTROLLER_NAME, DetectAsusAuraGPUControllers);

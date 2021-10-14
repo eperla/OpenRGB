@@ -3,6 +3,7 @@
 #include "OpenRGBDevicePage.h"
 #include "OpenRGBDeviceInfoPage.h"
 #include "OpenRGBServerInfoPage.h"
+#include "OpenRGBConsolePage.h"
 #include "OpenRGBPluginContainer.h"
 #include "OpenRGBProfileSaveDialog.h"
 #include "ResourceManager.h"
@@ -340,6 +341,7 @@ OpenRGBDialog2::OpenRGBDialog2(QWidget *parent) : QMainWindow(parent), ui(new Op
     trayIconMenu->addMenu(quickColorsMenu);
 
     QAction* actionLightsOff = new QAction("Lights Off", this);
+    actionLightsOff->setObjectName("ActionLightsOff");
     connect(actionLightsOff, SIGNAL(triggered()), this, SLOT(on_LightsOff()));
     trayIconMenu->addAction(actionLightsOff);
 
@@ -416,14 +418,14 @@ OpenRGBDialog2::OpenRGBDialog2(QWidget *parent) : QMainWindow(parent), ui(new Op
     AddSoftwareInfoPage();
 
     /*-----------------------------------------------------*\
-    | Add the Supported Devices page                        |
-    \*-----------------------------------------------------*/
-    AddSupportedDevicesPage();
-
-    /*-----------------------------------------------------*\
     | Add the settings page                                 |
     \*-----------------------------------------------------*/
     AddSettingsPage();
+
+    /*-----------------------------------------------------*\
+    | Add the Supported Devices page                        |
+    \*-----------------------------------------------------*/
+    AddSupportedDevicesPage();
 
     /*-----------------------------------------------------*\
     | Initialize the plugin manager                         |
@@ -436,7 +438,7 @@ OpenRGBDialog2::OpenRGBDialog2(QWidget *parent) : QMainWindow(parent), ui(new Op
     /*-----------------------------------------------------*\
     | Add the Plugins page                                  |
     \*-----------------------------------------------------*/
-    AddPluginsPage(plugin_manager);
+    AddPluginsPage();
 
     /*-----------------------------------------------------*\
     | Add the E1.31 settings page                           |
@@ -474,7 +476,27 @@ OpenRGBDialog2::OpenRGBDialog2(QWidget *parent) : QMainWindow(parent), ui(new Op
     if(ShowI2CTools)
     {
         AddI2CToolsPage();
+    }    
+
+    /*-----------------------------------------------------*\
+    | If log console is enabled in settings, enable it      |
+    \*-----------------------------------------------------*/
+    json log_manager_settings = settings_manager->GetSettings("LogManager");
+
+    bool log_console_enabled = false;
+    if(log_manager_settings.contains("log_console"))
+    {
+        log_console_enabled = log_manager_settings["log_console"];
     }
+
+    /*-----------------------------------------------------*\
+    | Add the log console page                              |
+    \*-----------------------------------------------------*/
+    if(log_console_enabled)
+    {
+        AddConsolePage();
+    }
+
 }
 
 OpenRGBDialog2::~OpenRGBDialog2()
@@ -521,11 +543,12 @@ void OpenRGBDialog2::closeEvent(QCloseEvent *event)
     }
     else
     {
+        plugin_manager->UnloadPlugins();
         event->accept();
     }
 }
 
-void OpenRGBDialog2::AddPluginsPage(PluginManager* plugin_manager)
+void OpenRGBDialog2::AddPluginsPage()
 {
     /*-----------------------------------------------------*\
     | Create the Plugins page                               |
@@ -633,7 +656,7 @@ void OpenRGBDialog2::AddSettingsPage()
     /*-----------------------------------------------------*\
     | Create the tab label                                  |
     \*-----------------------------------------------------*/
-    TabLabel* SettingsTabLabel = new TabLabel(SettingsLabelString, "Settings");
+    TabLabel* SettingsTabLabel = new TabLabel(SettingsLabelString, "General Settings");
 
     ui->SettingsTabBar->tabBar()->setTabButton(ui->SettingsTabBar->tabBar()->count() - 1, QTabBar::LeftSide, SettingsTabLabel);
 }
@@ -906,6 +929,8 @@ void OpenRGBDialog2::AddPlugin(OpenRGBPluginEntry* plugin)
 
     if(NewTrayMenu)
     {
+        NewTrayMenu->setParent(trayIconMenu);
+
         trayIconMenu->insertMenu(actionExit, NewTrayMenu);
     }
 }
@@ -1676,4 +1701,29 @@ void Ui::OpenRGBDialog2::TogglePluginsVisibility(int tab_idx, QTabWidget* tabBar
     {
         ((OpenRGBPluginContainer*) tab)->Show();
     }
+}
+
+void Ui::OpenRGBDialog2::AddConsolePage()
+{
+    OpenRGBConsolePage* page = new OpenRGBConsolePage();
+
+    ui->InformationTabBar->addTab(page, "");
+
+    QString ConsoleLabelString;
+
+    if(IsDarkTheme())
+    {
+        ConsoleLabelString = "console_dark.png";
+    }
+    else
+    {
+        ConsoleLabelString = "console.png";
+    }
+
+    /*-----------------------------------------------------*\
+    | Create the tab label                                  |
+    \*-----------------------------------------------------*/
+    TabLabel* ConsoleTabLabel = new TabLabel(ConsoleLabelString, "Log Console");
+
+    ui->InformationTabBar->tabBar()->setTabButton(ui->InformationTabBar->tabBar()->count() - 1, QTabBar::LeftSide, ConsoleTabLabel);
 }

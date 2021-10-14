@@ -2,6 +2,7 @@
 
 IWbemLocator* Wmi::pLoc = nullptr;
 IWbemServices* Wmi::pSvc = nullptr;
+HRESULT WmiInit = Wmi::init();
 
 // Taken from https://stackoverflow.com/questions/215963/
 // Convert a wide Unicode string to an UTF8 string
@@ -55,7 +56,7 @@ HRESULT Wmi::init()
     }
 
     // Initialize COM. ------------------------------------------
-    hres = CoInitializeEx(0, COINIT_MULTITHREADED);
+    hres = CoInitializeEx(0, COINIT_APARTMENTTHREADED);
     if (FAILED(hres))
     {
         return hres;
@@ -148,7 +149,7 @@ HRESULT Wmi::query(std::string queryStr, std::vector<QueryObj>& queryVectorOut, 
     IEnumWbemClassObject* pEnumerator = nullptr;
 
     // Initialize COM. ------------------------------------------
-    hres = CoInitializeEx(0, COINIT_MULTITHREADED);
+    hres = CoInitializeEx(0, COINIT_APARTMENTTHREADED);
     if (FAILED(hres))
     {
         return hres;

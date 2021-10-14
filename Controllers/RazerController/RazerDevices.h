@@ -3982,6 +3982,76 @@ static const razer_device deathadder_v2_device =
 };
 
 /*-------------------------------------------------------------*\
+|  Razer DeathAdder V2 Pro (Wired) 1532:007C	                |
+|                                                               |
+|  Zone "Logo"                                                  |
+|       Single                                                  |
+|       1 LED                                                   |
+\*-------------------------------------------------------------*/
+static const razer_zone deathadder_v2_pro_wired_logo_zone =
+{
+    "Logo",
+    ZONE_TYPE_SINGLE,
+    1,
+    1
+};
+
+static const razer_device deathadder_v2_pro_wired_device =
+{
+    "Razer DeathAdder V2 (Wired)",
+    RAZER_DEATHADDER_V2_PRO_WIRED_PID,
+    DEVICE_TYPE_MOUSE,
+    false,
+    1,
+    1,
+    {
+        &deathadder_v2_pro_wired_logo_zone,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    NULL,
+    0
+};
+
+/*-------------------------------------------------------------*\
+|  Razer DeathAdder V2 Pro (Wireless) 1532:007D                 |
+|                                                               |
+|  Zone "Logo"                                                  |
+|       Single                                                  |
+|       1 LED                                                   |
+\*-------------------------------------------------------------*/
+static const razer_zone deathadder_v2_pro_wireless_logo_zone =
+{
+    "Logo",
+    ZONE_TYPE_SINGLE,
+    1,
+    1
+};
+
+static const razer_device deathadder_v2_pro_wireless_device =
+{
+    "Razer DeathAdder V2 (Wireless)",
+    RAZER_DEATHADDER_V2_PRO_WIRELESS_PID,
+    DEVICE_TYPE_MOUSE,
+    false,
+    1,
+    1,
+    {
+        &deathadder_v2_pro_wireless_logo_zone,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    NULL,
+    0
+};
+
+/*-------------------------------------------------------------*\
 |  Razer Diamondback Chroma                                     |
 |                                                               |
 |  Zone "LED Strip"                                             |
@@ -6009,6 +6079,42 @@ static const razer_device base_station_device =
     0
 };
 
+
+/*-------------------------------------------------------------*\
+|  Razer Mouse Bungee V3 Chroma                                 |
+|                                                               |
+|  Zone "LED Strip"                                             |
+|       Linear                                                  |
+|       8 LEDs                                                 |
+\*-------------------------------------------------------------*/
+static const razer_zone mouse_bungee_zone =
+{
+    "LED Strip",
+    ZONE_TYPE_LINEAR,
+    1,
+    8
+};
+
+static const razer_device mouse_bungee_device =
+{
+    "Razer Mouse Bungee V3 Chroma",
+    RAZER_MOUSE_BUNGEE_V3_CHROMA_PID,
+    DEVICE_TYPE_MOUSE,
+    true,
+    1,
+    8,
+    {
+        &mouse_bungee_zone,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    },
+    NULL,
+    0
+};
+
 /*-------------------------------------------------------------*\
 |  Razer Base Station V2 Chroma                                 |
 |                                                               |
@@ -6286,6 +6392,8 @@ static const razer_device* device_list[] =
     &deathadder_essential_device,
     &deathadder_essential_white_edition_device,
     &deathadder_v2_device,
+    &deathadder_v2_pro_wired_device,
+    &deathadder_v2_pro_wireless_device,
     &diamondback_chroma_device,
     &lancehead_2017_wired_device,
     &lancehead_2017_wireless_device,
@@ -6335,6 +6443,7 @@ static const razer_device* device_list[] =
 \*-----------------------------------------------------------------*/
     &base_station_device,
     &base_station_v2_device,
+    &mouse_bungee_device,
     &charging_pad_chroma_device,
     &chromaargb_device,
     &chromahdk_device,

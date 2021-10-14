@@ -18,6 +18,12 @@ typedef unsigned short	crucial_register;
 
 enum
 {
+    CRUCIAL_REG_DEVICE_VERSION      = 0x1000,   /* Version (Date) String 16 bytes   */
+    CRUCIAL_REG_MICRON_CHECK        = 0x1030    /* "Micron" string should be here   */
+};
+
+enum
+{
     CRUCIAL_MODE_UNKNOWN            = 0x00,     /* We don't know what the mode is   */
     CRUCIAL_MODE_SHIFT              = 0x1F,     /* Shift effect mode                */
     CRUCIAL_MODE_GRADIENT_SHIFT     = 0x2F,     /* Gradient shift mode              */
@@ -39,22 +45,18 @@ public:
     CrucialController(i2c_smbus_interface* bus, crucial_dev_id dev);
     ~CrucialController();
 
-    std::string   GetDeviceName();
+    std::string   GetDeviceVersion();
     std::string   GetDeviceLocation();
-    unsigned int  GetLEDCount();
     void          SetAllColorsDirect(RGBColor* colors);
     void          SetAllColorsEffect(RGBColor* colors);
     void          SetMode(unsigned char mode);
 
     unsigned char CrucialRegisterRead(crucial_register reg);
     void          CrucialRegisterWrite(crucial_register reg, unsigned char val);
+    void          CrucialRegisterWriteBlock(crucial_register reg, unsigned char * data, unsigned char sz);
 
 private:
-    char                    device_name[16];
-    unsigned char           config_table[64];
-    unsigned int            led_count;
-    unsigned char           channel_cfg;
-    unsigned char           last_mode;
+    char                    device_version[16];
     i2c_smbus_interface *   bus;
     crucial_dev_id          dev;
 

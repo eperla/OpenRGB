@@ -57,6 +57,7 @@ static const gpu_pci_device device_list[] =
     { NVIDIA_VEN,   NVIDIA_RTX3070_DEV,         GIGABYTE_SUB_VEN,   GIGABYTE_RTX3070_VISION_OC_SUB_DEV,             0x63,   "Gigabyte RTX3070 Vision 8G"                    },
     { NVIDIA_VEN,   NVIDIA_RTX3070TI_DEV,       GIGABYTE_SUB_VEN,   GIGABYTE_RTX3070TI_GAMING_OC_SUB_DEV,           0x62,   "Gigabyte RTX3070 Ti Gaming OC 8G"              },
     { NVIDIA_VEN,   NVIDIA_RTX3080TI_DEV,       GIGABYTE_SUB_VEN,   GIGABYTE_RTX3080TI_GAMING_OC_SUB_DEV,           0x62,   "Gigabyte RTX3080 Ti Gaming OC 12G"             },
+    { NVIDIA_VEN,   NVIDIA_RTX3080_DEV,         GIGABYTE_SUB_VEN,   GIGABYTE_RTX3080_GAMING_OC_SUB_DEV,             0x62,   "Gigabyte RTX3080 Gaming OC 10G"                },
     { NVIDIA_VEN,   NVIDIA_RTX3090_DEV,         GIGABYTE_SUB_VEN,   GIGABYTE_RTX3090_GAMING_OC_24GB_SUB_DEV,        0x62,   "Gigabyte RTX3090 Gaming OC 24G"                },
 };
 
@@ -82,7 +83,6 @@ bool TestForGigabyteRGBFusionGPUController(i2c_smbus_interface* bus, unsigned ch
         bus->i2c_smbus_write_byte(address, 0x00);
         bus->i2c_smbus_write_byte(address, 0x00);
         bus->i2c_smbus_write_byte(address, 0x00);
-        
         // NVIDIA_RTX3060_DEV requires additional bytes to initialise
         if (address == 0x62)
         {
